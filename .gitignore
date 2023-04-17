@@ -20,8 +20,6 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-<<<<<<< HEAD
+
 hs_err_pid*
-=======
-hs_err_pid*
->>>>>>> 05dd69d71f3e5b5caf0f2c998b8891be753468b4
+
