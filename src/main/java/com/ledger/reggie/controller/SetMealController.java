@@ -45,6 +45,4 @@ public class SetMealController {
         return setMealService.getSetmealDtoList(categoryId,status);
     }
 
-
-
 }

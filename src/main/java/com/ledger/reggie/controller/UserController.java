@@ -11,10 +11,12 @@ import com.ledger.reggie.utils.SMSUtils;
 import com.sun.org.apache.bcel.internal.classfile.Code;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ledger
@@ -26,9 +28,11 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("/sendMsg")
-    public R<String> sendMsg(@RequestBody User user, HttpSession session) {
+    public R<String> sendMsg(@RequestBody User user) {
         //获取手机号
         String phone = user.getPhone();
         if (StrUtil.isNotBlank(phone)) {
@@ -36,41 +40,34 @@ public class UserController {
             String code = RandomUtil.randomNumbers(4);
             log.info(code);
             //调用发送短信的业务
-            SMSUtils.sendMessage("瑞吉外卖","SMS_276445657",phone,code);
+            SMSUtils.sendMessage("瑞吉外卖", "SMS_276445657", phone, code);
             //同时保存手机号和验证码
-            session.setAttribute("phone", phone);
-            session.setAttribute("code", code);
+            stringRedisTemplate.opsForValue().set("code:" + phone, code, 5, TimeUnit.MINUTES);
         }
         return R.error("短信发送失败");
     }
 
     @PostMapping("login")
-    public R<User> login(@RequestBody Map map, HttpSession session) {
-
-        log.info(map.toString());
+    public R<User> login(@RequestBody Map<String,String> map) {
         //获取发送过来的手机号和验证码(要做非空判断)
-        Long phone = Long.valueOf(map.get("phone").toString());
-        Long code = Long.valueOf(map.get("code").toString());
-        Long phone1 = Long.valueOf(session.getAttribute("phone").toString());
-        Long code1 = Long.valueOf( session.getAttribute("code").toString());
-        if(/*phone.longValue()==phone1.longValue()&&code.longValue()==code1.longValue()*/true){
-            //登录成功就村用户信息到手机号到数据库
-            LambdaQueryWrapper<User> lqw=new LambdaQueryWrapper<>();
-            lqw.eq(User::getPhone,phone);
-            User user=userService.getOne(lqw);
-            if (user==null) {
-                user = new User();
-                user.setPhone(phone.toString());
-                user.setStatus(1);
-                userService.save(user);
-            }
-            session.setAttribute("user",user);
+        long phone = Long.parseLong(map.get("phone"));
+        long code = Long.parseLong(map.get("code"));
+        String check = stringRedisTemplate.opsForValue().get("code:" + phone);
+        if (phone == 0 || code == 0) {
+            return R.error(null);
+        }
+        if (Long.toString(code).equals(check)) {
+            User user = new User();
+            user.setPhone(Long.toString(phone));
+            userService.save(user);
+            stringRedisTemplate.delete("code:" + phone);
             return R.success(user);
         }
         return R.error(null);
     }
+
     @PostMapping("/loginout")
-    public R<String> loginOut(HttpSession session){
+    public R<String> loginOut(HttpSession session) {
         return userService.loginOut(session);
     }
 }

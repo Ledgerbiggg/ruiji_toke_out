@@ -48,18 +48,15 @@ public class LoginCheckFilter implements Filter {
         //判断pc端的后台登录状态,登录就放行
         Object employee = request.getSession().getAttribute("employee");
         if (employee != null) {
-            BaseContext.setCurrentId((Long)employee);
+//            BaseContext.setCurrentId((Long)employee);
             filterChain.doFilter(request,response);
             return;
         }
         //判断移动端的登录状态,登录就放行
-        User user = (User)request.getSession().getAttribute("user");
-        if (user != null) {
-            BaseContext.setCurrentId((Long)user.getId());
+        if (true) {
             filterChain.doFilter(request,response);
             return;
         }
-
         response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
     }
     public boolean check(String[] urls,String requestURL){

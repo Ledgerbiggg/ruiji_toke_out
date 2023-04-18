@@ -2,6 +2,8 @@ package com.ledger.reggie.service.impl;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,13 +19,12 @@ import com.ledger.reggie.service.DishFlavorService;
 import com.ledger.reggie.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static cn.hutool.core.bean.BeanUtil.copyProperties;
@@ -40,7 +41,10 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
     private DishFlavorService dishFlavorService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
+    @Transactional
     @Override
     public R<String> saveWithFlavor(DishDto dishDto) {
         //保存菜品的基本信息
@@ -52,6 +56,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
             flavor.setDishId(id);
         }
         dishFlavorService.saveBatch(flavors);
+        stringRedisTemplate.delete("CategoryId:" + dishDto.getCategoryId());
         return R.success("添加成功");
     }
 
@@ -126,12 +131,19 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         this.removeById(dishDto.getId());
         //直接调用保存方法，因为dishDto里面有id，所以所有的id都不会变
         saveWithFlavor(dishDto);
+        stringRedisTemplate.delete("CategoryId:" + dishDto.getCategoryId());
         return R.success("保存成功");
     }
 
     @Override
     public R<List<DishDto>> getDishList(DishDto dishDto) {
         LambdaQueryWrapper<Dish> lqw = new LambdaQueryWrapper<>();
+        //先走一趟redis
+        String res = stringRedisTemplate.opsForValue().get("CategoryId:" + dishDto.getCategoryId());
+        if (StrUtil.isNotBlank(res)) {
+            List<DishDto> dishDtoList = JSONUtil.toList(res, DishDto.class);
+            return R.success(dishDtoList);
+        }
         //根据传过来的分类id来查找需要的菜品种类
         lqw.eq(dishDto.getCategoryId() != null, Dish::getCategoryId, dishDto.getCategoryId());
         //根据sort值升序排
@@ -151,6 +163,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
             dishDto1.setFlavors(dishFlavors);
             return dishDto1;
         }).collect(Collectors.toList());
+        stringRedisTemplate.opsForValue().set("CategoryId:" + dishDto.getCategoryId(), JSONUtil.toJsonStr(collect));
         return R.success(collect);
     }
 
@@ -171,11 +184,17 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         if (count > 0) {
             throw new CustomException("存在没有停售的商品");
         }
+        //移出菜品之前查找到数据，然后根据种类id去查询
+        List<Dish> dishes = listByIds(Arrays.asList(ids));
         //批量删除ids的数据
         removeByIds(IDS);
         LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.in(DishFlavor::getDishId, IDS);
         dishFlavorService.remove(lambdaQueryWrapper);
+        for (Dish dish : dishes) {
+            Long categoryId = dish.getCategoryId();
+            stringRedisTemplate.delete("CategoryId:" + categoryId);
+        }
         return R.success("删除成功");
     }
 
@@ -195,6 +214,11 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         LambdaQueryWrapper<Dish> lqwForDish = new LambdaQueryWrapper<>();
         lqwForDish.eq(Dish::getStatus, status);
         update().set("status", status).in("id", IDS).update();
+        List<Dish> dishes = listByIds(Arrays.asList(ids));
+        for (Dish dish : dishes) {
+            Long categoryId = dish.getCategoryId();
+            stringRedisTemplate.delete("CategoryId:" + categoryId);
+        }
         return R.success(status == 0 ? "停售成功" : "起售唱歌");
     }
 }
