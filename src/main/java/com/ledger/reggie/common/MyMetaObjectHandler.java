@@ -21,8 +21,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         metaObject.setValue("createTime", LocalDateTime.now());
         metaObject.setValue("updateTime", LocalDateTime.now());
-        metaObject.setValue("createUser", BaseContext.getCurrent());
-        metaObject.setValue("updateUser", BaseContext.getCurrent());
+        metaObject.setValue("createUser",1L /*BaseContext.getCurrent()*/);
+        metaObject.setValue("updateUser",1L /*BaseContext.getCurrent()*/);
     }
     /**
      * 更新自动填充
@@ -32,7 +32,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         metaObject.setValue("createTime", LocalDateTime.now());
         metaObject.setValue("updateTime", LocalDateTime.now());
-        metaObject.setValue("createUser", BaseContext.getCurrent());
-        metaObject.setValue("updateUser", BaseContext.getCurrent());
+        metaObject.setValue("createUser", 1L/*BaseContext.getCurrent()*/);
+        metaObject.setValue("updateUser", 1L/*BaseContext.getCurrent()*/);
     }
 }

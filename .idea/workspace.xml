@@ -4,9 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28291f49-d3e7-4e4d-8453-924edf63631e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="28291f49-d3e7-4e4d-8453-924edf63631e" name="Default Changelist" comment="我就更改了一下redisTemplate的配置类，虽然我还是用stringRedisTemplate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/common/MyMetaObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/common/MyMetaObjectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/SetMealController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/SetMealController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/Test1Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/Test2Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/filter/LoginCheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/filter/LoginCheckFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/service/impl/DishServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/service/impl/DishServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/service/impl/SetmealServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ledger/reggie/service/impl/SetmealServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ledger/reggie/common/MyMetaObjectHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ledger/reggie/common/MyMetaObjectHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ledger/reggie/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ledger/reggie/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ledger/reggie/filter/LoginCheckFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ledger/reggie/filter/LoginCheckFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ledger/reggie/service/impl/DishServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ledger/reggie/service/impl/DishServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ledger/reggie/service/impl/SetmealServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ledger/reggie/service/impl/SetmealServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +36,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="v1.0" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="b1" />
@@ -73,6 +100,9 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\javaProject\reggie_take_out\src\main\java\com\ledger\reggie\dto" />
@@ -94,7 +124,7 @@
       <module name="reggie_take_out" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ledger.reggie.*" />
+          <option name="PATTERN" value="com.ledger.reggie.ReggieApplication" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -105,10 +135,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ReggieApplication" />
-        <item itemvalue="Spring Boot.ReggieApplication" />
-        <item itemvalue="Spring Boot.ReggieApplication" />
-        <item itemvalue="Spring Boot.ReggieApplication" />
         <item itemvalue="Spring Boot.ReggieApplication" />
       </list>
     </recent_temporary>
@@ -132,100 +158,38 @@
       <workItem from="1681529691821" duration="23990000" />
       <workItem from="1681607155883" duration="29136000" />
       <workItem from="1681691304634" duration="639000" />
-      <workItem from="1681696389672" duration="5302000" />
-      <workItem from="1681706075547" duration="400000" />
+      <workItem from="1681696389672" duration="1803000" />
+      <workItem from="1681710743599" duration="1235000" />
+      <workItem from="1681730434586" duration="4373000" />
+      <workItem from="1681778507964" duration="3588000" />
+      <workItem from="1681789748060" duration="2337000" />
+      <workItem from="1681796482691" duration="5004000" />
+      <workItem from="1681815321699" duration="5595000" />
     </task>
-    <task id="LOCAL-00001" summary="test">
-      <created>1681698423464</created>
+    <task id="LOCAL-00001" summary="我更新了一次">
+      <created>1681786170386</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1681698423464</updated>
+      <updated>1681786170386</updated>
     </task>
-    <task id="LOCAL-00002" summary="test">
-      <created>1681698504595</created>
+    <task id="LOCAL-00002" summary="我就更改了一下redisTemplate的配置类，虽然我还是用stringRedisTemplate">
+      <created>1681796590650</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1681698504595</updated>
+      <updated>1681796590650</updated>
     </task>
-    <task id="LOCAL-00003" summary="test">
-      <created>1681700098843</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681700098843</updated>
-    </task>
-    <task id="LOCAL-00004" summary="test">
-      <created>1681700107847</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1681700107847</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-        <entry key="d466b496-6058-4ec8-936a-f99997a67cac">
-          <value>
-            <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="roots">
-                    <value>
-                      <list>
-                        <option value="$PROJECT_DIR$" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="d466b496-6058-4ec8-936a-f99997a67cac" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="我更新了一次" />
+    <MESSAGE value="我就更改了一下redisTemplate的配置类，虽然我还是用stringRedisTemplate" />
+    <option name="LAST_COMMIT_MESSAGE" value="我就更改了一下redisTemplate的配置类，虽然我还是用stringRedisTemplate" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
