@@ -167,6 +167,8 @@
       <workItem from="1681789748060" duration="2337000" />
       <workItem from="1681796482691" duration="5004000" />
       <workItem from="1681815321699" duration="5595000" />
+      <workItem from="1681828883411" duration="32000" />
+      <workItem from="1681870105812" duration="1452000" />
     </task>
     <task id="LOCAL-00001" summary="我更新了一次">
       <created>1681786170386</created>
@@ -189,7 +191,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681821637304</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="增加缓存版本">
+      <created>1681824457287</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681824457287</updated>
+    </task>
+    <task id="LOCAL-00005" summary="11">
+      <created>1681824711109</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681824711109</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,7 +218,8 @@
     <MESSAGE value="我更新了一次" />
     <MESSAGE value="我就更改了一下redisTemplate的配置类，虽然我还是用stringRedisTemplate" />
     <MESSAGE value="增加缓存版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加缓存版本" />
+    <MESSAGE value="11" />
+    <option name="LAST_COMMIT_MESSAGE" value="11" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
